@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Boutique de suppléments sportifs - Protéines, Créatine, BCAA et plus">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="cart.css">
+  <title>Boutique - Suppléments Sportifs | INFO-BODYBUILDING</title>
+  <style>
+ /* Reset and Global Styles */
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden; /* Fix for horizontal scroll/sway issue */
+}
+
+:root {
+  --accent-color: rgb(255, 193, 7);
+  --text-light: #777;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  /* Added commonly-used variables to avoid broken/missing styles */
+  --primary-color: var(--accent-color);
+  --secondary-color: #28a745; /* green-color */
+  --text-color: #222222;
+  --gray-color: #888888;
+  --danger-color: #e74c3c;
+  --success-color: #28a745;
+  --shadow: 0 6px 18px rgba(0,0,0,0.08);
+  --transition: all 0.3s ease;
+  --light-color: #f4f7f9;
+  --dark-color: #000000;
+}
+
+
+/* Header Styles */
+#main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background-color: black;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Hamburger Menu Icon */
+.menu-icon {
+    display: none; /* Hidden by default */
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.menu-icon:hover {
+    color: rgb(255, 193, 7);
+}
+
+/* Logo Section */
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+/* Navigation Menu */
+.navbar {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: rgb(255, 193, 7);
+}
+
+
+
+
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Action Icons (Search, Shop, Subscribe) */
+.action-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-link {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-link:hover {
+    color: rgb(255, 193, 7);
+}
+
+/* Search Box */
+.search-box {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50px; /* Adjust based on header height */
+    right: 0; /* Align with icons */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-box.visible {
+    display: flex; /* Show when visible */
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-button {
+    background-color: rgb(255, 193, 7);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: rgb(255, 150, 0);
+}
+
+
+
+
+    .container {
+        margin: 0 auto;
+        max-width: 1300px;
+        text-align: center;
+        padding: 0 20px;
+    }
+
+    .container h1 {
+        color: var(--primary-color);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .container h2 {
+        color: var(--text-color);
+        font-size: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .row-advantages {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        padding: 40px 20px;
+        margin-top: 30px;
+        background: white;
+        border-radius: 15px;
+        box-shadow: var(--shadow);
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .product-grid {
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      padding: 40px 10px;
+    }
+
+    .col {
+      flex: 1;
+      min-width: 200px;
+      padding: 20px;
+      transition: var(--transition);
+    }
+
+    .col:hover {
+      transform: translateY(-5px);
+    }
+
+    .icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: var(--primary-color);
+    }
+
+    .col h5 {
+        margin: 10px 0;
+        font-size: 1.2rem;
+        color: var(--text-color);
+    }
+
+    .col p {
+        color: var(--gray-color);
+        margin: 0;
+    }
+
+    .product-grid {
+      background: var(--light-color);
+      margin: 0;
+      padding: 40px 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      position: relative;
+      transition: var(--transition);
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .product-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      transform: scaleX(0);
+      transition: var(--transition);
+    }
+
+    .product-card:hover::before {
+      width: 100%; transform: scaleX(1);
+    }
+
+    .product-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+    }
+
+    .product-card img {
+      max-width: 100%;
+      height: 180px;
+      object-fit: contain;
+      margin-bottom: 15px;
+      transition: var(--transition);
+    }
+
+    .product-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .badge {
+      background-color: var(--secondary-color);
+      color: white;
+      font-size: 0.8em;
+      padding: 5px 10px;
+      border-radius: 5px;
+      display: inline-block;
+      margin: 8px 0;
+      font-weight: bold;
+    }
+
+    .product-card h3 {
+      margin: 10px 0;
+      font-size: 1.1rem;
+      color: var(--text-color);
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .price {
+      margin: 15px 0;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .old {
+      text-decoration: line-through;
+      color: var(--gray-color);
+      font-size: 0.9em;
+      margin-right: 8px;
+    }
+
+    .new {
+      color: var(--danger-color);
+      font-size: 1.1em;
+    }
+
+    .discount {
+      background: #ffe6e6;
+      color: var(--danger-color);
+      padding: 3px 8px;
+      border-radius: 15px;
+      font-size: 0.85em;
+      font-weight: bold;
+      margin-left: 8px;
+    }
+
+    .stars {
+      color: orange;
+      font-size: 0.9em;
+      margin: 10px 0;
+    }
+
+    .pagination {
+      margin-top: 40px;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .pagination button {
+      margin: 0 3px;
+      padding: 10px 16px;
+      border: none;
+      background: #eee;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-weight: bold;
+    }
+
+    .pagination button:hover:not(.active) {
+      background: #ddd;
+      transform: translateY(-2px);
+    }
+
+    .pagination .active {
+      background-color: var(--secondary-color);
+      color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 2000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.7);
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .slide .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: 5% auto;
+      padding: 30px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 900px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      animation: slideUp 0.4s ease;
+      position: relative;
+    }
+    .slide .content {
+      position: relative; z-index: 2; color: white; text-align: center; padding: 20px;
+    }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .close {
+      color: #aaa;
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: var(--transition);
+      z-index: 1;
+    }
+
+    .close:hover {
+      color: var(--dark-color);
+      transform: rotate(90deg);
+    }
+
+    .product-modal {
+      display: flex;
+      gap: 30px;
+    }
+
+    .product-modal-image {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .product-modal-image img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .product-modal-details {
+      flex: 1;
+      text-align: left;
+    }
+
+    .product-modal-title {
+      font-size: 28px;
+      margin-bottom: 15px;
+      color: var(--text-color);
+    }
+
+    .product-modal-price {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .product-modal-description {
+      margin-bottom: 25px;
+      line-height: 1.7;
+      color: var(--gray-color);
+    }
+
+    .add-to-cart-btn {
+      background-color: var(--primary-color);
+      color: var(--dark-color);
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: var(--transition);
+      width: 100%;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .add-to-cart-btn:hover {
+      background-color: rgb(255, 150, 0);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+    }
+
+    .quantity-selector {
+      display: flex;
+      align-items: center;
+      margin-bottom: 25px;
+      gap: 15px;
+    }
+
+    .quantity-btn {
+      background-color: #eee;
+      border: none;
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .quantity-btn:hover {
+      background-color: #ddd;
+      transform: scale(1.1);
+    }
+
+    .quantity-input {
+      width: 60px;
+      text-align: center;
+      height: 40px;
+      border: 2px solid #ddd;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .quantity-input:focus {
+      border-color: var(--primary-color);
+      outline: none;
+    }
+
+    /* Loading Animation */
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(255,255,255,.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--success-color);
+      color: white;
+      padding: 15px 25px;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      z-index: 3000;
+      transform: translateX(150%);
+      transition: transform 0.4s ease;
+    }
+
+    .toast.show {
+      transform: translateX(0);
+    }
+
+    /* Slider Styles */
+    .slider, .slides, .slide {
+      width: 100vw;
+      height: 90vh;
+      max-width: 100vw;
+      max-height: 90vh;
+      overflow: hidden;
+    }
+
+    .slides {
+      display: flex;
+      width: 300%;
+      height: 100%;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .slide {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-repeat: no-repeat;
+      position: relative;
+      background-position: center;
+      flex-shrink: 0;
+    }
+
+    .s1 {
+      background-image: url('complement photos/whey-protein-banner.jpg');
+    }
+    .s2 {
+      background-image: url('complement photos/pre-workout-banner.jpg');
+    }
+    .s3 {
+      background-image: url('complement photos/quality-supplements-banner.jpg');
+    }
+
+    /* Hide radio buttons */
+    .slider input[type="radio"] {
+      display: none;
+    }
+
+    /* Navigation dots */
+    .navigation {
+      position: absolute;
+      bottom: 30px;
+      width: 100%;
+      text-align: center;
+      z-index: 3;
+    }
+
+    .bar {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin: 0 10px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      opacity: 0.5;
+      transition: var(--transition);
+    }
+
+    .bar:hover {
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    /* Slide position control via radio */
+    #slide1:checked ~ .slides {
+      transform: translateX(0%);
+    }
+    #slide2:checked ~ .slides {
+      transform: translateX(-100%);
+    }
+    #slide3:checked ~ .slides {
+      transform: translateX(-200%);
+    }
+
+    /* Active dot highlight */
+    #slide1:checked ~ .navigation label[for="slide1"],
+    #slide2:checked ~ .navigation label[for="slide2"],
+    #slide3:checked ~ .navigation label[for="slide3"] {
+      opacity: 1;
+      background-color: var(--primary-color);
+      transform: scale(1.2);
+    }
+
+    .arrows {
+      position: absolute;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      justify-content: space-between;
+      padding: 0 20px;
+      z-index: 4;
+    }
+
+    .arrows label {
+      color: #fff;
+      font-size: 3rem;
+      background-color: rgba(0, 0, 0, 0.3);
+      padding: 5px 15px;
+      border-radius: 50%;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .arrows label:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+      transform: scale(1.1);
+    }
+
+    #slide1:checked ~ .arrows .prev1,
+    #slide1:checked ~ .arrows .next1 {
+      display: block;
+    }
+    #slide2:checked ~ .arrows .prev2,
+    #slide2:checked ~ .arrows .next2 {
+      display: block;
+    }
+    #slide3:checked ~ .arrows .prev3,
+    #slide3:checked ~ .arrows .next3 {
+      display: block;
+    }
+
+    .arrows label {
+      display: none;
+    }
+
+    /* Filter Buttons */
+    .filter-section {
+      padding: 30px 20px;
+      background-color: #fff;
+      border-radius: 12px;
+      margin: 30px 0;
+      box-shadow: var(--shadow);
+    }
+
+    .filter-section h3 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--text-color);
+      font-size: 1.5rem;
+    }
+
+    .filter-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .filter-btn {
+      background: #f0f0f0;
+      border: 2px solid transparent;
+      padding: 10px 20px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: var(--transition);
+    }
+
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--primary-color);
+      color: var(--dark-color);
+      transform: translateY(-2px);
+      border-color: var(--primary-color);
+    }
+
+
+    
+/* Footer styles */
+.footer {
+    margin-top: 5%;
+    background-color: #000000; /* Ensure footer is black */
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.footer-logo h1 {
+    color: var(--accent-color);
+    margin: 0;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+/* Bootstrap icon styling for footer */
+.social-icon .bi {
+    font-size: 28px;
+    color: #fff;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    background: rgba(255,255,255,0.1);
+}
+
+.social-icon:hover .bi,
+.social-icon:focus .bi {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.social-icon:focus {
+    outline: 3px solid rgba(255,193,7,0.22);
+    outline-offset: 3px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px 30px;
+    min-width: 150px;
+}
+
+.footer-links h3 {
+    color: white;
+    margin: 0 0 15px;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-links h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin: 8px 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    background-color: rgb(255, 150, 0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .exercises-p1 .work-container .work {
+        width: 31%;
+    }
+}
+
+@media (max-width: 900px) {
+    .exercises-p1 .work-container .work {
+        width: 48%;
+        min-width: 180px;
+        padding: 12px;
+    }
+    
+    #main-header {
+        padding: 10px 20px;
+    }
+    
+    .nav-links {
+        gap: 30px;
+    }
+    
+    .footer-links {
+        justify-content: flex-start;
+    }
+    
+    .footer-links div {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-header {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    
+    .navbar {
+        order: 3;
+        flex: 100%;
+        margin-top: 15px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .header-actions {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    
+    .search-box {
+        top: 60px;
+        right: 15px;
+    }
+    
+    .search-input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 560px) {
+    .exercises-p1 .work-container .work {
+        width: 100%;
+        min-width: auto;
+        padding: 10px 6px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+    
+    .footer-links div {
+        width: 100%;
+        margin: 0 0 25px;
+    }
+    
+    .footer-logo h1 {
+        font-size: 28px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+}  
+</style>
+</head>
+<body>
+  
+    <header id="main-header">
+        <div class="logo-container">
+            <a href="index.html"><img class="logo" src="accueil-photos/z01.jpg" alt="INFO-BODYBUILDING Logo"></a>
+        </div>
+    
+        <nav class="navbar" id="navbar">
+            <ul class="nav-links">
+                <li><a  href="workout.html">WORKOUTS</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="articles.html">ARTICLES</a></li>
+            </ul>
+        </nav>
+    
+        <div class="header-actions">
+            <!-- Action Icons -->
+            <div class="action-icons">
+                <!-- Search Icon -->
+                <a id="search-icon" href="javascript:void(0)" class="icon-link" onclick="toggleSearchBox()">
+                    <i class="bi bi-search"></i>
+                </a>
+                <!-- Shop Icon -->
+                <a id="shop-icon" href="panier.html" class="icon-link" aria-label="Shopping cart">
+                    <i class="bi bi-cart4"></i>
+                    <span id="cart-counter" class="cart-counter"></span>
+                </a>
+                <!-- Subscribe Icon -->
+                <a id="subscribe-icon" href="sing.html" class="icon-link">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+            </div>
+
+            <div class="search-box" id="search-box">
+                <input type="text" class="search-input" placeholder="Search...">
+                <button class="search-button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hamburger Menu Icon -->
+        <div class="menu-icon" id="menu-icon">
+            <i class="bi bi-list"></i>
+        </div>
+    </header>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast"></div>
+
+<section class="slider" aria-label="Carrousel de produits">
+    <!-- Radio Buttons -->
+    <input type="radio" name="slider" id="slide1" checked aria-label="Slide 1">
+    <input type="radio" name="slider" id="slide2" aria-label="Slide 2">
+    <input type="radio" name="slider" id="slide3" aria-label="Slide 3">
+
+    <!-- Slides -->
+    <div class="slides">
+      <div class="slide s1">
+        <div class="overlay"></div> 
+        <div class="content">
+          <h1>PROTÉINES DE QUALITÉ SUPÉRIEURE</h1>
+          <p>Atteignez vos objectifs avec notre sélection de whey, caséine et protéines végétales.</p>
+        </div>
+      </div>
+      <div class="slide s2">
+        <div class="overlay"></div>
+        <div class="content">
+          <h1>ÉNERGIE EXPLOSIVE AVANT L'ENTRAÎNEMENT</h1>
+          <p>Boostez vos performances avec nos Pre-Workouts puissants.</p>
+        </div>
+      </div>
+      <div class="slide s3">
+        <div class="overlay"></div>
+        <div class="content">
+          <h1>LA QUALITÉ AU MEILLEUR PRIX</h1>
+          <p>Des suppléments testés et approuvés pour des résultats garantis.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Dots -->
+    <div class="navigation">
+      <label for="slide1" class="bar" aria-label="Aller au slide 1"></label>
+      <label for="slide2" class="bar" aria-label="Aller au slide 2"></label>
+      <label for="slide3" class="bar" aria-label="Aller au slide 3"></label>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <div class="arrows">
+      <!-- Prev Buttons -->
+      <label for="slide3" class="prev prev1" aria-label="Slide précédent">&#10094;</label>
+      <label for="slide1" class="prev prev2" aria-label="Slide précédent">&#10094;</label>
+      <label for="slide2" class="prev prev3" aria-label="Slide précédent">&#10094;</label>
+
+      <!-- Next Buttons -->
+      <label for="slide2" class="next next1" aria-label="Slide suivant">&#10095;</label>
+      <label for="slide3" class="next next2" aria-label="Slide suivant">&#10095;</label>
+      <label for="slide1" class="next next3" aria-label="Slide suivant">&#10095;</label>
+    </div>
+</section>
+
+<br><br>
+
+<section aria-labelledby="shop-title">
+  <div class="container">
+      <h1 id="shop-title">🍃 SHOP NOW 🍃</h1>
+      <h2>Découvrez nos suppléments de qualité professionnelle</h2>
+          <div class="row-advantages">
+              <div class="col">
+                  <div class="icon"><i class="bi bi-truck"></i></div>
+                  <h5>Livraison Gratuite</h5>
+                  <p>Pour toute commande supérieure à 599 Dhs</p>
+              </div>
+              <div class="col">
+                  <i class="bi bi-box icon"></i>
+                  <h5>Retours Faciles</h5>
+                  <p>Politique de retour de 30 jours</p>
+              </div> 
+              <div class="col">
+                  <i class="bi bi-credit-card icon"></i>
+                  <h5>Paiement Sécurisé</h5>
+                  <p>Garantie 100% sécurisée</p>
+              </div> 
+              <div class="col">
+                  <i class="bi bi-headset icon"></i>
+                  <h5>Support Spécial</h5>
+                  <p>Support dédié 24/7</p>
+              </div> 
+          </div>
+  </div>
+</section>
+
+<!-- Filter Section -->
+<section class="container filter-section" aria-labelledby="filter-title">
+  <h3 id="filter-title">Filtrer par Catégorie</h3>
+  <div class="filter-buttons">
+    <button class="filter-btn active" onclick="filterProducts('all'); setActive(this);">Tous</button>
+    <button class="filter-btn" onclick="filterProducts('protein'); setActive(this);">Protéines</button>
+    <button class="filter-btn" onclick="filterProducts('creatine'); setActive(this);">Créatine</button>
+    <button class="filter-btn" onclick="filterProducts('pre-workout'); setActive(this);">Pre-Workout</button>
+    <button class="filter-btn" onclick="filterProducts('amino'); setActive(this);">Acides Aminés</button>
+    <button class="filter-btn" onclick="filterProducts('vitamins'); setActive(this);">Vitamines</button>
+    <button class="filter-btn" onclick="filterProducts('fat-burner'); setActive(this);">Brûleurs de Graisse</button>
+  </div>
+</section>
+
+<section aria-labelledby="products-title">
+  <div class="container">
+    <h2 id="products-title" style="text-align: center; margin: 40px 0 20px; color: var(--secondary-color);">NOS PRODUITS PHARES</h2>
+  </div>
+  <div class="product-grid" id="product-grid" aria-live="polite">
+    <!-- Products will be loaded here by JavaScript 
+  </div>
+  <div class="pagination" id="pagination" aria-label="Navigation des pages"></div>
+</section> -->
+
+<!-- Product Modal -->
+<div id="productModal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+  <div class="modal-content">
+    <span class="close" aria-label="Fermer">&times;</span>
+    <div class="product-modal" id="modal-content">
+      <!-- Content will be loaded here -->
+    </div>
+  </div>
+</div>
+
+
+
+<br><br>
+
+<!-- Footer -->
+    <footer class="footer">
+        <div class="footer-logo">
+            <h1>INFO-BODYBUILDING</h1>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook" class="social-icon"><i class="bi bi-facebook"></i></a>
+                <a href="#" aria-label="Instagram" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                <a href="#" aria-label="GitHub" class="social-icon"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div>
+                <h3>Workout</h3>
+                <ul>
+                    <li><a href="exercices.html">Exercise</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="shop.html">Protein</a></li>
+                    <li><a href="shop.html">Vitamin</a></li>
+                    <li><a href="shop.html">Creatin</a></li>
+                    <li><a href="shop.html">Pre-Workout</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Articles</h3>
+                <ul>
+                    <li><a href="articles.html">Workout</a></li>
+                    <li><a href="articles.html">Nutrition</a></li>
+                    <li><a href="articles.html">Supplements</a></li>
+                    <li><a href="articles.html">Tips</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Search</a></li>
+                    <li><a href="sing.html">S'inscrire</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+
+<script src="shop.js"></script>
+<script src="cart-counter.js"></script>
+
+</body>
+</html>

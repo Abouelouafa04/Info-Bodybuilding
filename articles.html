@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="cart.css">
+  <title>Bodybuilding Articles</title>
+  <style>
+ /* Reset and Global Styles */
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --green-color: #28a745;
+    --bg-color: #ffffff;
+    --light-orange-color: #ffb300;
+    --dark-bg: #000000;
+    --accent-color: rgb(255, 193, 7);
+    --text-light: #777;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Header Styles */
+#main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background-color: black;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Hamburger Menu Icon */
+.menu-icon {
+    display: none; /* Hidden by default */
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.menu-icon:hover {
+    color: rgb(255, 193, 7);
+}
+
+/* Logo Section */
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+/* Navigation Menu */
+.navbar {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: rgb(255, 193, 7);
+}
+
+
+
+
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Action Icons (Search, Shop, Subscribe) */
+.action-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-link {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-link:hover {
+    color: rgb(255, 193, 7);
+}
+
+/* Search Box */
+.search-box {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50px; /* Adjust based on header height */
+    right: 0; /* Align with icons */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-box.visible {
+    display: flex; /* Show when visible */
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-button {
+    background-color: rgb(255, 193, 7);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: rgb(255, 150, 0);
+}
+
+
+
+
+
+
+    body {
+      /* Fix for horizontal scroll/sway issue */
+      overflow-x: hidden;
+      background-color: white; /* Light background for the page */
+
+      font-family: 'Arial', sans-serif;
+      color: #f0f0f0;
+    }
+
+    .filter-buttons {
+      margin-top: 3%;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .filter-buttons button {
+      background-color: white;
+      color: black;
+      border: 1px solid #333;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .filter-buttons button:hover,
+    .filter-buttons button.active {
+      background-color: rgb(255, 193, 7);
+    }
+
+    .articles-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .article {
+      background-color: #413f3f;
+      border-radius: 10px;
+      width: 300px;
+      padding: 15px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      transition: transform 0.3s;
+    }
+
+    .article:hover {
+      transform: scale(1.02);
+    }
+
+    .article img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    .article h3 {
+      font-size: 1.2em;
+      margin-top: 10px;
+    }
+
+    .article p {
+      font-size: 0.95em;
+      color: #ccc;
+    }
+
+    .article a {
+      display: inline-block;
+      margin-top: 10px;
+      color:  rgb(255, 193, 7);
+      text-decoration: none;
+    }
+
+
+
+
+
+
+/* Footer styles */
+.footer {
+    margin-top: 5%;
+    background-color: #000000; /* Ensure footer is black */
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.footer-logo h1 {
+    color: var(--accent-color);
+    margin: 0;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+/* Bootstrap icon styling for footer */
+.social-icon .bi {
+    font-size: 28px;
+    color: #fff;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    background: rgba(255,255,255,0.1);
+}
+
+.social-icon:hover .bi,
+.social-icon:focus .bi {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.social-icon:focus {
+    outline: 3px solid rgba(255,193,7,0.22);
+    outline-offset: 3px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px 30px;
+    min-width: 150px;
+}
+
+.footer-links h3 {
+    color: white;
+    margin: 0 0 15px;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-links h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin: 8px 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    background-color: rgb(255, 150, 0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .exercises-p1 .work-container .work {
+        width: 31%;
+    }
+}
+
+@media (max-width: 900px) {
+    .exercises-p1 .work-container .work {
+        width: 48%;
+        min-width: 180px;
+        padding: 12px;
+    }
+    
+    #main-header {
+        padding: 10px 20px;
+    }
+    
+    .nav-links {
+        gap: 30px;
+    }
+    
+    .footer-links {
+        justify-content: flex-start;
+    }
+    
+    .footer-links div {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-header {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    
+    .navbar {
+        order: 3;
+        flex: 100%;
+        margin-top: 15px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .header-actions {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    
+    .search-box {
+        top: 60px;
+        right: 15px;
+    }
+    
+    .search-input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 560px) {
+    .exercises-p1 .work-container .work {
+        width: 100%;
+        min-width: auto;
+        padding: 10px 6px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+    
+    .footer-links div {
+        width: 100%;
+        margin: 0 0 25px;
+    }
+    
+    .footer-logo h1 {
+        font-size: 28px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+}
+  </style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="logo-container">
+            <a href="index.html"><img class="logo" src="accueil-photos/z01.jpg" alt="INFO-BODYBUILDING Logo"></a>
+        </div>
+    
+        <nav class="navbar" id="navbar">
+            <ul class="nav-links">
+                <li><a  href="workout.html">WORKOUTS</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="articles.html">ARTICLES</a></li>
+            </ul>
+        </nav>
+    
+        <div class="header-actions">
+            <!-- Action Icons -->
+            <div class="action-icons">
+                <!-- Search Icon -->
+                <a id="search-icon" href="javascript:void(0)" class="icon-link" onclick="toggleSearchBox()">
+                    <i class="bi bi-search"></i>
+                </a>
+                <!-- Shop Icon -->
+                <a id="shop-icon" href="panier.html" class="icon-link" aria-label="Shopping cart">
+                    <i class="bi bi-cart4"></i>
+                    <span id="cart-counter" class="cart-counter"></span>
+                </a>
+                <!-- Subscribe Icon -->
+                <a id="subscribe-icon" href="sing.html" class="icon-link">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+            </div>
+
+            <div class="search-box" id="search-box">
+                <input type="text" class="search-input" placeholder="Search...">
+                <button class="search-button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Hamburger Menu Icon -->
+        <div class="menu-icon" id="menu-icon">
+            <i class="bi bi-list"></i>
+        </div>
+    </header>
+
+
+
+  <div class="filter-buttons">
+    <button class="active" onclick="filterArticles('all')">All</button>
+    <button onclick="filterArticles('Workout')">Workout</button>
+    <button onclick="filterArticles('Nutrition')">Nutrition</button>
+    <button onclick="filterArticles('Supplements')">Supplements</button>
+    <button onclick="filterArticles('Tips')">Tips</button>
+  </div>
+
+  <div class="articles-container">
+    <div class="article" data-category="Workout">
+      <img src="image-knowledge/programs.jpeg" alt="Workout">
+      <h3>PROGRAMS</h3>
+      <p>Training programs are the backbone of any bodybuilding journey, as they provide structure...</p>
+      <a href="pro.html">Read More</a>
+    </div>
+    <div class="article" data-category="Nutrition">
+      <img src="image-knowledge/healthyFood.jpeg" alt="Nutrition">
+      <h3>HEALTHY FOOD</h3>
+      <p>Healthy food plays a critical and foundational role in bodybuilding, as nutrition directly...</p>
+      <a href="healthyfood.html">Read More</a>
+    </div>
+    <div class="article" data-category="Workout">
+      <img src="image-knowledge/cardio.jpeg" alt="Supplements">
+      <h3>CARDIO</h3>
+      <p>Running can play a useful role in bodybuilding, although it is often viewed as an activity primarily for...</p>
+      <a href="cardio.html">Read More</a>
+    </div>
+    <div class="article" data-category="Nutrition">
+      <img src="image-knowledge/drnikWater.jpeg" alt="Tips">
+      <h3>WATER</h3>
+      <p>Water is one of the most important elements for the body, especially when it comes to exercise and training...</p>
+      <a href="water.html">Read More</a>
+    </div>
+    <div class="article" data-category="Supplements">
+        <img src="image-knowledge/supplement.jpeg" alt="Tips">
+        <h3>SUPPLEMENTS</h3>
+        <p>Supplements can be a useful addition to a bodybuilding regimen, but they should complement, not replace...</p>
+        <a href="supplement.html">Read More</a>
+    </div>
+    <div class="article" data-category="Workout">
+        <img src="image-knowledge/stetching.jpeg" alt="Tips">
+        <h3>STRETCHING</h3>
+        <p>Stretching exercises are essential for improving flexibility, reducing muscle tension, and preventing injuries...</p>
+        <a href="stretching.html">Read More</a>
+    </div>
+    <div class="article" data-category="Tips">
+        <img src="image-knowledge/Steroid.jpeg" alt="Tips">
+        <h3>DOPING</h3>
+        <p>In bodybuilding, doping (using performance-enhancing drugs or PEDs) is a controversial and dangerous practice...</p>
+        <a href="doping.html">Read More</a>
+    </div>
+      
+  </div>
+
+  <script>
+    function filterArticles(category) {
+      const buttons = document.querySelectorAll('.filter-buttons button');
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      event.target.classList.add('active');
+
+      const articles = document.querySelectorAll('.article');
+      articles.forEach(article => {
+        const articleCategory = article.getAttribute('data-category');
+        if (category === 'all' || category === articleCategory) {
+          article.style.display = 'block';
+        } else {
+          article.style.display = 'none';
+        }
+      });
+    }
+
+
+        // JavaScript to toggle the visibility of the search box
+        function toggleSearchBox() {
+        const searchBox = document.getElementById('search-box');
+        searchBox.classList.toggle('visible');
+    }
+
+
+  </script>
+
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <h1>INFO-BODYBUILDING</h1>
+            <div class="social-icons">
+                <a href="#" aria-label="Facebook" class="social-icon"><i class="bi bi-facebook"></i></a>
+                <a href="#" aria-label="Instagram" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                <a href="#" aria-label="GitHub" class="social-icon"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div>
+                <h3>Workout</h3>
+                <ul>
+                    <li><a href="exercices.html">Exercise</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="shop.html">Protein</a></li>
+                    <li><a href="shop.html">Vitamin</a></li>
+                    <li><a href="shop.html">Creatin</a></li>
+                    <li><a href="shop.html">Pre-Workout</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Articles</h3>
+                <ul>
+                    <li><a href="articles.html">Workout</a></li>
+                    <li><a href="articles.html">Nutrition</a></li>
+                    <li><a href="articles.html">Supplements</a></li>
+                    <li><a href="articles.html">Tips</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Search</a></li>
+                    <li><a href="sing.html">S'inscrire</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+
+    
+
+        <script src="cart-counter.js"></script>
+</body>
+</html>

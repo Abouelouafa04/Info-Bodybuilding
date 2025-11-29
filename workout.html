@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="cart.css">
+    <title>Document</title>
+
+<style>
+
+ /* Reset and Global Styles */
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden; /* Fix for horizontal scroll/sway issue */
+}
+
+
+:root {
+    --green-color: #28a745;
+    --bg-color: #ffffff;
+    --light-orange-color: #ffb300;
+    --dark-bg: #000000;
+    --accent-color: rgb(255, 193, 7);
+    --text-light: #777;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Header Styles */
+#main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background-color: black;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Hamburger Menu Icon */
+.menu-icon {
+    display: none; /* Hidden by default */
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.menu-icon:hover {
+    color: rgb(255, 193, 7);
+}
+
+/* Logo Section */
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+/* Navigation Menu */
+.navbar {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: rgb(255, 193, 7);
+}
+
+
+
+
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Action Icons (Search, Shop, Subscribe) */
+.action-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-link {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-link:hover {
+    color: rgb(255, 193, 7);
+}
+
+/* Search Box */
+.search-box {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50px; /* Adjust based on header height */
+    right: 0; /* Align with icons */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-box.visible {
+    display: flex; /* Show when visible */
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-button {
+    background-color: rgb(255, 193, 7);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: rgb(255, 150, 0);
+}
+
+
+
+
+.workouts-section {
+  margin-top: 2%;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.section-title {
+  font-size: 48px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #222;
+}
+
+.section-subtitle {
+  font-size: 16px;
+  color: #5d5959;
+  margin-bottom: 40px;
+}
+
+.workouts-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+
+.workout-item {
+    width: 250px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: black;
+}   
+
+.workout-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.workout-image {
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+
+.workout-label {
+  margin-top: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgb(255, 193, 7);
+}
+
+.workout-item a {
+        text-decoration: none;
+    }
+
+
+
+
+
+
+
+/* Footer styles */
+.footer {
+    margin-top: 5%;
+    background-color: #000000; /* Ensure footer is black */
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.footer-logo h1 {
+    color: var(--accent-color);
+    margin: 0;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+/* Bootstrap icon styling for footer */
+.social-icon .bi {
+    font-size: 28px;
+    color: #fff;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    background: rgba(255,255,255,0.1);
+}
+
+.social-icon:hover .bi,
+.social-icon:focus .bi {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.social-icon:focus {
+    outline: 3px solid rgba(255,193,7,0.22);
+    outline-offset: 3px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px 30px;
+    min-width: 150px;
+}
+
+.footer-links h3 {
+    color: white;
+    margin: 0 0 15px;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-links h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin: 8px 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    background-color: rgb(255, 150, 0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .exercises-p1 .work-container .work {
+        width: 31%;
+    }
+}
+
+@media (max-width: 900px) {
+    .exercises-p1 .work-container .work {
+        width: 48%;
+        min-width: 180px;
+        padding: 12px;
+    }
+    
+    #main-header {
+        padding: 10px 20px;
+    }
+    
+    .nav-links {
+        gap: 30px;
+    }
+    
+    .footer-links {
+        justify-content: flex-start;
+    }
+    
+    .footer-links div {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-header {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    
+    .navbar {
+        order: 3;
+        flex: 100%;
+        margin-top: 15px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .header-actions {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    
+    .search-box {
+        top: 60px;
+        right: 15px;
+    }
+    
+    .search-input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 560px) {
+    .exercises-p1 .work-container .work {
+        width: 100%;
+        min-width: auto;
+        padding: 10px 6px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+    
+    .footer-links div {
+        width: 100%;
+        margin: 0 0 25px;
+    }
+    
+    .footer-logo h1 {
+        font-size: 28px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+}
+
+</style>
+
+</head>
+<body>
+
+
+    <header id="main-header">
+        <div class="logo-container">
+            <a href="index.html"><img class="logo" src="accueil-photos/z01.jpg" alt="INFO-BODYBUILDING Logo"></a>
+        </div>
+    
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a class="active" href="workout.html">WORKOUTS</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="articles.html">ARTICLES</a></li>
+            </ul>
+        </nav>
+    
+        <div class="header-actions">
+            <!-- Action Icons -->
+            <div class="action-icons">
+                <!-- Search Icon -->
+                <a id="search-icon" href="javascript:void(0)" class="icon-link" onclick="toggleSearchBox()">
+                    <i class="bi bi-search"></i>
+                </a>
+                <!-- Shop Icon -->
+                <a id="shop-icon" href="panier.html" class="icon-link" aria-label="Shopping cart">
+                    <i class="bi bi-cart4"></i>
+                    <span id="cart-counter" class="cart-counter"></span>
+                </a>
+                <!-- Subscribe Icon -->
+                <a id="subscribe-icon" href="sing.html" class="icon-link">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+            </div>
+
+            <div class="search-box" id="search-box">
+                <input type="text" class="search-input" placeholder="Search...">
+                <button class="search-button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+<script>
+        // JavaScript to toggle the visibility of the search box
+        function toggleSearchBox() {
+        const searchBox = document.getElementById('search-box');
+        searchBox.classList.toggle('visible');
+    }
+</script>
+
+
+    <div class="workouts-section">
+        <h2 class="section-title">WORKOUTS</h2>
+        <p class="section-subtitle">Comprehensive plans for your total fitness journey.</p>
+      
+        <div class="workouts-grid">
+          <div class="workout-item">
+            <a href="exercice.html">
+              <img src="accueil-photos/Siluetas de hombre trabajando y entrenamiento de crossfit con diferentes equipos aislados en blanco _ Vector Premium.jpeg" alt="Exercises" class="workout-image">
+              <p class="workout-label">EXERCISES</p>
+            </a>
+          </div>
+      
+          <div class="workout-item">
+                <a href="programs.html">
+                <img src="accueil-photos/Download Free Vectors, Images, Photos & Videos _ Vecteezy.jpeg" alt="Programs" class="workout-image">
+              <p class="workout-label">PROGRAMS</p>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+
+      
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <h1>INFO-BODYBUILDING</h1>
+            <div class="social-icons">
+                <a href="javascript:void(0)" aria-label="Facebook" class="social-icon"><i class="bi bi-facebook"></i></a>
+                <a href="javascript:void(0)" aria-label="Instagram" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="javascript:void(0)" aria-label="LinkedIn" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                <a href="javascript:void(0)" aria-label="GitHub" class="social-icon"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div>
+                <h3>Workout</h3>
+                <ul>
+                    <li><a href="exercices.html">Exercise</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="shop.html">Protein</a></li>
+                    <li><a href="shop.html">Vitamin</a></li>
+                    <li><a href="shop.html">Creatin</a></li>
+                    <li><a href="shop.html">Pre-Workout</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Articles</h3>
+                <ul>
+                    <li><a href="articles.html">Workout</a></li>
+                    <li><a href="articles.html">Nutrition</a></li>
+                    <li><a href="articles.html">Supplements</a></li>
+                    <li><a href="articles.html">Tips</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="javascript:void(0)">Search</a></li>
+                    <li><a href="sing.html">S'inscrire</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+    <script src="cart-counter.js"></script>
+</body>
+</html>

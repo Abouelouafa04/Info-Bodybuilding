@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="A propos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=Jaro:opsz@6..72&family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Pacifico&family=Playwrite+IE+Guides&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+<style>
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --green-color: #28a745;
+    --bg-color: #ffffff;
+    --light-orange-color: #ffb300;
+    --dark-bg: #000000;
+    --accent-color: rgb(255, 193, 7);
+    --text-light: #777;
+    --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f8f9fa;
+}
+
+/* Header Styles */
+#main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background-color: var(--dark-bg);
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 9999;
+}
+
+/* Logo Section */
+.logo-container {
+    flex: 1;
+    position: relative;
+    z-index: 10001;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 10001;
+    max-width: 80px;
+    transition: transform 0.3s ease;
+    background-image: url("/accueil-photos/z01.jpg");
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Make sure interactive header elements don't overlap the logo */
+.header-actions,
+.action-icons {
+    z-index: 10000;
+    position: relative;
+}
+
+/* Navigation Menu */
+.navbar {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-links li a:hover {
+    color: var(--accent-color);
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links li a:hover::after { 
+    width: 100%;
+}
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Action Icons (Search, Shop, Subscribe) */
+.action-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-link {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease, transform 0.2s ease;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.icon-link:hover {
+    color: var(--accent-color);
+    background-color: rgba(255, 193, 7, 0.1);
+    transform: translateY(-2px);
+}
+
+/* Search Box */
+.search-box {
+    display: none;
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 10002;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.search-box.visible {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+    width: 250px;
+    transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+    border-color: var(--accent-color);
+}
+
+.search-button {
+    background-color: var(--accent-color);
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.search-button:hover {
+    background-color: rgb(255, 150, 0);
+}
+
+
+
+
+
+.about-us{
+    padding: 80px 0;
+
+}
+.container{
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.row{
+    display: flex;
+    flex-wrap: wrap;
+}
+img{
+    height: 400px;
+    width: 450px;
+}
+.flex{
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding: 0 20px;
+}
+.about-us h2{
+    font-size: 45px;
+    margin-bottom: 20px;
+    color: #333;
+
+}
+.about-us h3{
+    font-size: 22px;
+    color: burlywood;
+    margin-bottom: 8px;
+
+}
+.about-us p{
+    font-size: 18px;
+    line-height: 2.5;
+    color: #555;
+    margin-bottom: 20px;
+}
+.about-us img{
+    display: block;
+    max-width: 60%;
+    height: auto;
+    margin: 0 auto;
+}
+.social-links{
+    margin-bottom: 20px;
+}
+.social-links a{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 50%;
+    margin-right: 10px;
+    color: #fff;
+    background-color: #333;
+    box-shadow: 0 2px 5px rgb(0, 0,0,0.3);
+    transition: all 0.4s ease;
+}
+.social-links a:hover{
+    transform: translateY(-3px);
+}
+.btn{
+    text-decoration: none;
+    color: #fff;
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 5px;
+    background-color: rgb(255, 193, 7);
+    transition: all 0.4s ease;
+    box-shadow: 0 2px 5px rgb(0, 0,0,0.3);
+
+}
+.btn:hover{
+    transform: translateY(-3px);
+}
+@media  screen and (max-width:768px) {
+    .row{
+        flex-direction: column;
+
+    }
+    .flex{
+        max-width: 100%;
+    }
+    .about-us h2{
+        font-size: 31px;
+    }
+    .about-us p{
+        font-size: 16px;
+    }
+    .social-links a{
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+        font-size: 14px;
+        margin-right: 5px;
+    }
+    .btn{
+        font-size: 16px;
+        padding: 8px 16px ;
+        margin-bottom: 30px;
+    }
+}
+
+
+
+
+
+
+ 
+/* Footer styles */
+.footer {
+    margin-top: 5%;
+    background-color: var(--dark-bg);
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.footer-logo h1 {
+    color: var(--accent-color);
+    margin: 0;
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    margin: 0 10px;
+}
+
+/* Bootstrap icon styling for footer */
+.social-icon .bi {
+    font-size: 28px;
+    color: #fff;
+    transition: transform 0.2s, color 0.2s;
+}
+
+.social-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.social-icon:hover,
+.social-icon:focus {
+    background: rgba(255,255,255,0.1);
+}
+
+.social-icon:hover .bi,
+.social-icon:focus .bi {
+    color: var(--accent-color);
+    transform: translateY(-3px);
+}
+
+.social-icon:focus {
+    outline: 3px solid rgba(255,193,7,0.22);
+    outline-offset: 3px;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.footer-links div {
+    display: flex;
+    flex-direction: column;
+    margin: 0 15px 30px;
+    min-width: 150px;
+}
+
+.footer-links h3 {
+    color: white;
+    margin: 0 0 15px;
+    font-size: 18px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-links h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+.footer-links ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links ul li {
+    margin: 8px 0;
+}
+
+.footer-links a {
+    text-decoration: none;
+    color: var(--text-light);
+    transition: color 0.3s ease, padding-left 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--accent-color);
+    padding-left: 5px;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background-color: var(--accent-color);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+    z-index: 999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: translateY(-5px);
+    background-color: rgb(255, 150, 0);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+    .exercises-p1 .work-container .work {
+        width: 31%;
+    }
+}
+
+@media (max-width: 900px) {
+    .exercises-p1 .work-container .work {
+        width: 48%;
+        min-width: 180px;
+        padding: 12px;
+    }
+    
+    #main-header {
+        padding: 10px 20px;
+    }
+    
+    .nav-links {
+        gap: 30px;
+    }
+    
+    .footer-links {
+        justify-content: flex-start;
+    }
+    
+    .footer-links div {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    #main-header {
+        flex-wrap: wrap;
+        padding: 10px 15px;
+    }
+    
+    .navbar {
+        order: 3;
+        flex: 100%;
+        margin-top: 15px;
+    }
+    
+    .nav-links {
+        gap: 20px;
+        justify-content: center;
+    }
+    
+    .header-actions {
+        flex: 1;
+        justify-content: flex-end;
+    }
+    
+    .search-box {
+        top: 60px;
+        right: 15px;
+    }
+    
+    .search-input {
+        width: 200px;
+    }
+}
+
+@media (max-width: 560px) {
+    .exercises-p1 .work-container .work {
+        width: 100%;
+        min-width: auto;
+        padding: 10px 6px;
+    }
+    
+    .nav-links {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+    
+    .nav-links li a {
+        font-size: 0.9rem;
+    }
+    
+    .footer-links div {
+        width: 100%;
+        margin: 0 0 25px;
+    }
+    
+    .footer-logo h1 {
+        font-size: 28px;
+    }
+    
+    .page-title {
+        font-size: 1.5rem;
+    }
+}
+</style>
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="logo-container">
+            <a href="index.html"><img class="logo" src="accueil-photos/z01.jpg" alt="INFO-BODYBUILDING Logo"></a>
+        </div>
+    
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a class="active" href="workout.html">WORKOUTS</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="articles.html">ARTICLES</a></li>
+            </ul>
+        </nav>
+    
+        <div class="header-actions">
+            <!-- Action Icons -->
+            <div class="action-icons">
+                <!-- Search Icon -->
+                <a id="search-icon" href="javascript:void(0)" class="icon-link" onclick="toggleSearchBox()">
+                    <i class="bi bi-search"></i>
+                </a>
+                <!-- Shop Icon -->
+                <a id="shop-icon" href="panier.html" class="icon-link" aria-label="Shopping cart">
+                    <i class="bi bi-cart4"></i>
+                    <span id="cart-counter" class="cart-counter"></span>
+                </a>
+                <!-- Subscribe Icon -->
+                <a id="subscribe-icon" href="sing.html" class="icon-link">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+            </div>
+
+            <div class="search-box" id="search-box">
+                <input type="text" class="search-input" placeholder="Search...">
+                <button class="search-button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+
+    <div class="about-us">
+        <div class="container">
+            <div class="row">
+                <div class="flex">
+                    <h2>SUPPLEMENTS</h2>
+                    <h3></h3>
+                    <p>Supplements can be a useful addition to a bodybuilding regimen, but they should complement, not replace, a
+                     well-balanced diet. The primary  role of supplements is to fill any nutritional gaps, improve performance, 
+                     aid in recovery, and support overall health. While they are not necessary for everyone, certain supplements 
+                     can enhance your bodybuilding efforts when used appropriately.</p>
+                   
+                    </p>
+                    <div class="social-links">
+                        <a href="javascript:void(0)"><i class="bi bi-linkedin"></i></a>
+                        <a href="javascript:void(0)"><i class="bi bi-github"></i></a>
+                        <a href="javascript:void(0)"><i class="bi bi-instagram"></i></a>
+                        <a href="javascript:void(0)"><i class="bi bi-twitter-x"></i></a>
+                    </div>
+                    <a href="articles.html" class="btn">Retour à l'accueil</a>
+                </div>
+                <div class="flex">
+                    <img src="image-knowledge/supplement.jpeg"  alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <h1>INFO-BODYBUILDING</h1>
+            <div class="social-icons">
+                <a href="javascript:void(0)" aria-label="Facebook" class="social-icon"><i class="bi bi-facebook"></i></a>
+                <a href="javascript:void(0)" aria-label="Instagram" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="javascript:void(0)" aria-label="LinkedIn" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                <a href="javascript:void(0)" aria-label="GitHub" class="social-icon"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div>
+                <h3>Workout</h3>
+                <ul>
+                    <li><a href="exercices.html">Exercise</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="shop.html">Protein</a></li>
+                    <li><a href="shop.html">Vitamin</a></li>
+                    <li><a href="shop.html">Creatin</a></li>
+                    <li><a href="shop.html">Pre-Workout</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Articles</h3>
+                <ul>
+                    <li><a href="articles.html">Workout</a></li>
+                    <li><a href="articles.html">Nutrition</a></li>
+                    <li><a href="articles.html">Supplements</a></li>
+                    <li><a href="articles.html">Tips</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="javascript:void(0)">Search</a></li>
+                    <li><a href="sing.html">S'inscrire</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    
+    <script src="cart-counter.js"></script>
+</body>
+</html>

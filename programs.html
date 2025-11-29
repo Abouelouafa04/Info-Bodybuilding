@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Optimal Training Programs</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="cart.css">
+  <style>
+/* Reset and Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+:root {
+    --green-color: #28a745;
+    --bg-color: #ffffff;
+    --light-orange-color: #ffb300;
+}
+
+/* Header Styles */
+#main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 50px;
+    background-color: black;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+/* Logo Section */
+.logo-container {
+    flex: 1;
+}
+
+.logo {
+    width: 50px;
+    height: auto;
+}
+
+/* Navigation Menu */
+.navbar {
+    flex: 8;
+    display: flex;
+    justify-content: center;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 60px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: capitalize;
+    transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+    color: rgb(255, 193, 7);
+}
+
+
+
+
+
+/* Header Actions */
+.header-actions {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+/* Action Icons (Search, Shop, Subscribe) */
+.action-icons {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icon-link {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.icon-link:hover {
+    color: rgb(255, 193, 7);
+}
+
+/* Search Box */
+.search-box {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 50px; /* Adjust based on header height */
+    right: 0; /* Align with icons */
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.search-box.visible {
+    display: flex; /* Show when visible */
+    align-items: center;
+    gap: 10px;
+}
+
+.search-input {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.search-button {
+    background-color: rgb(255, 193, 7);
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+    background-color: rgb(255, 150, 0);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+    h1 {
+      color: rgb(255, 193, 7);
+      font-size: 32px;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    p {
+      color: #555;
+      font-size: 18px;
+      max-width: 600px;
+      margin: 0 auto 20px auto;
+      text-align: center;
+    }
+
+    .badges {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin: 20px 0;
+      font-size: 14px;
+      color: #777;
+    }
+
+    .badges span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+.days-selector {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+    .days-selector button {
+      background: #f1f1f1;
+      border: none;
+      padding: 10px 18px;
+      margin: 0 5px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .days-selector button.active {
+      background-color: #6200ea;
+      color: white;
+    }
+
+    .programs-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .program-card {
+      background-color: white;
+      width: 350px;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+
+    .program-card.active {
+      border-color: #d10047;
+    }
+
+    .program-card h3 {
+      margin-top: 0;
+    }
+
+    .training-days,
+    .benefits {
+      margin-top: 10px;
+    }
+
+    .training-days span {
+      display: inline-block;
+      margin: 5px 10px;
+      padding: 6px 12px;
+      background-color: #e3e3f1;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .benefits ul {
+      padding-left: 20px;
+      text-align: left;
+    }
+
+    .benefits li {
+      color: #d10047;
+      margin-bottom: 6px;
+    }
+
+
+
+
+
+
+        
+    
+
+    .footer {
+        margin-top: 5%;
+        background-color: black;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-logo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .footer-logo h1 {
+        color: rgb(255, 193, 7);
+        margin: 0;
+        font-size: 36px;
+    }
+    
+    .social-icons {
+        margin-top: 10px;
+    }
+    
+    .social-icons a {
+        margin: 0 10px;
+    }
+
+    /* Bootstrap icon styling for footer */
+    .social-icon .bi {
+        font-size: 28px;
+        color: #fff; /* default white to match footer */
+        transition: transform 0.2s, color 0.2s;
+    }
+    .social-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: rgba(255,255,255,0.05);
+        text-decoration: none;
+    }
+    .social-icon:hover .bi,
+    .social-icon:focus .bi {
+        color: rgb(255, 193, 7);
+        transform: translateY(-3px);
+    }
+    .social-icon:focus {
+        outline: 3px solid rgba(255,193,7,0.22);
+        outline-offset: 3px;
+    }
+    
+    .footer-links {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 20px;
+    }
+    
+    .footer-links div {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .footer-links h3 {
+        color: white;
+        margin: 0 0 10px;
+        font-size: 18px;
+    }
+    
+    .footer-links ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+    
+    .footer-links ul li {
+        margin: 5px 0;
+    }
+    
+    .footer-links a {
+        text-decoration: none;
+        color: #777;
+    }
+    
+    .footer-links a:hover {
+        color: rgb(255, 193, 7);
+    }
+  </style>
+</head>
+<body>
+
+
+
+    <header id="main-header">
+        <div class="logo-container">
+            <a href="index.html"><img class="logo" src="accueil-photos/z01.jpg" alt="INFO-BODYBUILDING Logo"></a>
+        </div>
+    
+        <nav class="navbar">
+            <ul class="nav-links">
+                <li><a class="active" href="workout.html">WORKOUTS</a></li>
+                <li><a href="shop.html">SHOP</a></li>
+                <li><a href="articles.html">ARTICLES</a></li>
+            </ul>
+        </nav>
+    
+        <div class="header-actions">
+            <!-- Action Icons -->
+            <div class="action-icons">
+                <!-- Search Icon -->
+                <a id="search-icon" href="javascript:void(0)" class="icon-link" onclick="toggleSearchBox()">
+                    <i class="bi bi-search"></i>
+                </a>
+        <!-- Shop Icon -->
+        <a id="shop-icon" href="panier.html" class="icon-link" aria-label="Shopping cart">
+          <i class="bi bi-cart4"></i>
+          <span id="cart-counter" class="cart-counter"></span>
+        </a>
+                <!-- Subscribe Icon -->
+                <a id="subscribe-icon" href="sing.html" class="icon-link">
+                    <i class="bi bi-person-circle"></i>
+                </a>
+            </div>
+
+            <div class="search-box" id="search-box">
+                <input type="text" class="search-input" placeholder="Search...">
+                <button class="search-button">
+                    <i class="bi bi-search"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+<br><br>
+
+
+
+  <h1>Optimal Training Programs</h1>
+  <p>
+    Maximize your gains with scientifically-backed training splits that hit every muscle group at least twice per week. Choose your training frequency and discover the perfect program.
+  </p>
+
+  <div class="badges">
+    <span>💪 2+ times per muscle group</span>
+    <span>🔁 Optimized for growth</span>
+    <span>📅 3-6 day options</span>
+  </div>
+
+  <br><br><br>
+
+  <div class="days-selector">
+    <button data-days="3">3 Days</button>
+    <button class="active" data-days="4">4 Days</button>
+    <button data-days="5">5 Days</button>
+    <button data-days="6">6 Days</button>
+  </div>
+
+  <div class="programs-container" id="programs-container">
+    <!-- Cards here -->
+  </div>
+
+
+
+
+    <footer class="footer">
+        <div class="footer-logo">
+            <h1>INFO-BODYBUILDING</h1>
+            <div class="social-icons">
+                <a href="javascript:void(0)" aria-label="Facebook" class="social-icon"><i class="bi bi-facebook"></i></a>
+                <a href="javascript:void(0)" aria-label="Instagram" class="social-icon"><i class="bi bi-instagram"></i></a>
+                <a href="javascript:void(0)" aria-label="LinkedIn" class="social-icon"><i class="bi bi-linkedin"></i></a>
+                <a href="javascript:void(0)" aria-label="GitHub" class="social-icon"><i class="bi bi-github"></i></a>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div>
+                <h3>Workout</h3>
+                <ul>
+                    <li><a href="exercices.html">Exercise</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Shop</h3>
+                <ul>
+                    <li><a href="shop.html">Protein</a></li>
+                    <li><a href="shop.html">Vitamin</a></li>
+                    <li><a href="shop.html">Creatin</a></li>
+                    <li><a href="shop.html">Pre-Workout</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Articles</h3>
+                <ul>
+                    <li><a href="articles.html">Workout</a></li>
+                    <li><a href="articles.html">Nutrition</a></li>
+                    <li><a href="articles.html">Supplements</a></li>
+                    <li><a href="articles.html">Tips</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Search</a></li>
+                    <li><a href="sing.html">S'inscrire</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+
+
+
+  <script>
+    const programs = {
+      3: [
+        {
+          title: "Upper/Lower/Full Body",
+          description: "Perfect balance of upper, lower, and full-body training",
+          days: ["Upper Body", "Lower Body", "Full Body"],
+          benefits: ["Optimal recovery", "Full body stimulus", "Beginner friendly"]
+        },
+        {
+          title: "Full Body 3x",
+          description: "Maximum frequency with three full-body sessions weekly",
+          days: ["Full Body", "Full Body", "Full Body"],
+          benefits: ["High frequency training", "Maximum muscle protein synthesis", "Time efficient"]
+        }
+      ],
+      4: [
+          {
+          title: "Upper/Lower(x2)",
+          description: "Classic upper/lower split performed twice weekly",
+          days: ["Upper Body", "Lower Body", "Upper Body", "Lower Body"],
+          benefits: ["Simple structure", "Great for strenght", "Balanced development"]
+        },
+       {
+          title: "Push/Pull/Legs+Upper",
+          description: "PPL foundation with additional upper body focus",
+          days: ["Push", "Pull", "legs", "Upper Body"],
+          benefits: ["Upper body emphaisi", "Varied training", "Progressive overload"]
+        },
+        {
+          title: "Arnold Split+Full Body",
+          description: "Classic Arnold split with full body finisher",
+          days: ["Chest/Back", "Shoulders/Arms", "Legs", "Full Body"],
+          benefits: ["Muscle pairing", "High intensity", "Complete stimulus"]
+        }
+      ],
+      5: [
+        {
+          title: "Push/Pull/Legs+Upper/Lower",
+          description: "PPL combined with upper/lower training",
+          days: ["Push", "Pull", "Legs", "Upper Body", "Lower Body"],
+          benefits: ["High frequency", "Varied stimulus", "Advanced progression"]
+        },
+        {
+          title: "Arnold+Upper",
+          description: "Arnold split enhanced with additional training days",
+          days: ["Chest/Back", "Shoulders/Arms", "legs", "Upper Body", "Lower Body"],
+          benefits: ["Muscle speciallization", "High volume", "Maximum growth"]
+        },
+        {
+          title: "Upper/Lower/Upper/Lower/Full Body",
+          description: "Extended upper/lower split with full body integration",
+          days: ["Full Body", "Full Body", "Full Body"],
+          benefits: ["Maximum frequency", "Complete development", "Elite gains"]
+        }
+      ],
+      6: [          {
+          title: "Push/Pull/Legs",
+          description: "Classic PPL performed twice per week",
+          days: ["Push", "Pull", "Legs", "Push", "Pull", "Legs"],
+          benefits: ["Proven system", "Bodybuilder favorite", "Maximum volume"]
+        },
+        {
+          title: "Arnold Split (x2)",
+          description: "Arnold's legendary split performed twice weekly",
+          days: ["Chest/Back", "Shoulders/Arms", "Legs", "Chest/Back", "Shoulders/Arms", "Legs"],
+          benefits: ["Antagonist pairing", "High intensity", "Champion proven"]
+        },
+        {
+          title: "Upper/Lower(x3)",
+          description: "Maximum frequency with three upper/lower cycles weekly",
+          days: ["Upper Body", "Lower Body", "Upper Body", "Lower Body", "Upper Body", "Lower Body"],
+          benefits: ["High frequency", "Balanced development", "Strength focus"]
+        }
+      ]
+    };
+
+    const container = document.getElementById("programs-container");
+    const buttons = document.querySelectorAll(".days-selector button");
+
+    function updatePrograms(dayCount) {
+      buttons.forEach(btn => btn.classList.remove("active"));
+      document.querySelector(`button[data-days="${dayCount}"]`).classList.add("active");
+
+      const selectedPrograms = programs[dayCount] || [];
+      container.innerHTML = "";
+
+      selectedPrograms.forEach((program, index) => {
+        const card = document.createElement("div");
+        card.className = "program-card";
+
+        card.innerHTML = `
+          <h3>${program.title}</h3>
+          <p>${program.description}</p>
+          <div class="training-days">
+            <strong>Training Days:</strong><br>
+            ${program.days.map(day => `<span>${day}</span>`).join("")}
+          </div>
+          ${program.benefits.length > 0 ? `
+            <div class="benefits">
+              <strong>Benefits:</strong>
+              <ul>
+                ${program.benefits.map(b => `<li>🔴 ${b}</li>`).join("")}
+              </ul>
+            </div>` : ""}
+        `;
+
+        card.addEventListener("click", () => {
+          document.querySelectorAll(".program-card").forEach(c => c.classList.remove("active"));
+          card.classList.add("active");
+        });
+
+        container.appendChild(card);
+      });
+    }
+
+    updatePrograms(4); // default view
+    buttons.forEach(button => {
+      button.addEventListener("click", () => {
+        const day = parseInt(button.getAttribute("data-days"));
+        updatePrograms(day);
+      });
+    });
+  </script>
+  <script src="cart-counter.js"></script>
+
+</body>
+</html>
+

@@ -1,0 +1,193 @@
+/* Button Styles */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-md);
+    font-weight: var(--font-medium);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+}
+
+.btn-primary {
+    background-color: var(--primary-600);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-700);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-accent {
+    background-color: var(--accent-500);
+    color: var(--text-dark);
+}
+
+.btn-accent:hover {
+    background-color: var(--accent-600);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-outline {
+    border: 2px solid var(--primary-600);
+    color: var(--primary-600);
+    background: transparent;
+}
+
+.btn-outline:hover {
+    background-color: var(--primary-600);
+    color: white;
+}
+
+/* Card Styles */
+.card {
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-6);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.card-title {
+    font-size: var(--text-xl);
+    font-weight: var(--font-semibold);
+    color: var(--text-dark);
+    margin-bottom: var(--space-4);
+}
+
+.card-content {
+    color: var(--text-secondary);
+    font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: var(--space-4);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--space-2);
+    font-weight: var(--font-medium);
+    color: var(--text-dark);
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--space-3);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    font-size: var(--text-base);
+    line-height: var(--leading-normal);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-400);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+/* Badge Styles */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-full);
+    font-size: var(--text-sm);
+    font-weight: var(--font-medium);
+    line-height: 1;
+}
+
+.badge-primary {
+    background-color: var(--primary-100);
+    color: var(--primary-800);
+}
+
+.badge-accent {
+    background-color: var(--accent-100);
+    color: var(--accent-800);
+}
+
+/* Alert Styles */
+.alert {
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-4);
+}
+
+.alert-success {
+    background-color: #f0fff4;
+    border: 1px solid #c6f6d5;
+    color: #2f855a;
+}
+
+.alert-warning {
+    background-color: #fffaf0;
+    border: 1px solid #feebc8;
+    color: #c05621;
+}
+
+.alert-error {
+    background-color: #fff5f5;
+    border: 1px solid #fed7d7;
+    color: #c53030;
+}
+
+/* Icon Button */
+.icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: var(--space-10);
+    height: var(--space-10);
+    border-radius: var(--radius-full);
+    background: transparent;
+    border: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-dark);
+    border-color: var(--border-dark);
+}
+
+/* Navigation Pills */
+.nav-pills {
+    display: flex;
+    gap: var(--space-2);
+}
+
+.nav-pill {
+    padding: var(--space-2) var(--space-4);
+    border-radius: var(--radius-full);
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.nav-pill:hover {
+    background-color: var(--bg-secondary);
+    color: var(--text-dark);
+}
+
+.nav-pill.active {
+    background-color: var(--primary-600);
+    color: white;
+}

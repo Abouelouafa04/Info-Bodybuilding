@@ -1,0 +1,225 @@
+/* Base Transitions */
+:root {
+    /* Transition Timings */
+    --transition-fast: 150ms;
+    --transition-base: 300ms;
+    --transition-slow: 500ms;
+    
+    /* Easings */
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+    
+    /* Animation Keyframes */
+    --scale: scale(0.98);
+    --scale-hover: scale(1.02);
+    --translate-y-hover: translateY(-4px);
+}
+
+/* Hover Effects */
+.hover-lift {
+    transition: transform var(--transition-base) var(--ease-out);
+}
+
+.hover-lift:hover {
+    transform: var(--translate-y-hover);
+}
+
+.hover-scale {
+    transition: transform var(--transition-base) var(--ease-out);
+}
+
+.hover-scale:hover {
+    transform: var(--scale-hover);
+}
+
+/* Click Effects */
+.click-scale {
+    transition: transform var(--transition-fast) var(--ease-in);
+}
+
+.click-scale:active {
+    transform: var(--scale);
+}
+
+/* Focus States */
+.focus-ring {
+    transition: box-shadow var(--transition-fast) var(--ease-out);
+}
+
+.focus-ring:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--primary-200);
+}
+
+/* Loading States */
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.loading {
+    position: relative;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 0.5em);
+    left: calc(50% - 0.5em);
+    width: 1em;
+    height: 1em;
+    border: 2px solid var(--primary-200);
+    border-top-color: var(--primary-600);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+/* Fade Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+.fade-in {
+    animation: fadeIn var(--transition-base) var(--ease-out);
+}
+
+.fade-out {
+    animation: fadeOut var(--transition-base) var(--ease-in);
+}
+
+/* Slide Animations */
+@keyframes slideInDown {
+    from {
+        transform: translateY(-1rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-in-down {
+    animation: slideInDown var(--transition-base) var(--ease-out);
+}
+
+.slide-in-up {
+    animation: slideInUp var(--transition-base) var(--ease-out);
+}
+
+/* Page Transitions */
+.page-transition {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: pageEnter 0.6s var(--ease-out) forwards;
+}
+
+@keyframes pageEnter {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth Scroll Behavior */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: var(--space-16);
+}
+
+/* Button Interactions */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+    width: 400px;
+    height: 400px;
+    opacity: 0;
+}
+
+/* Card Hover Effects */
+.card {
+    transition: transform var(--transition-base) var(--ease-out),
+                box-shadow var(--transition-base) var(--ease-out);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Navigation Link Interactions */
+.nav-links li a {
+    position: relative;
+}
+
+.nav-links li a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent-500);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform var(--transition-base) var(--ease-out);
+}
+
+.nav-links li a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Form Input Interactions */
+.form-input {
+    transition: border-color var(--transition-base) var(--ease-out),
+                box-shadow var(--transition-base) var(--ease-out);
+}
+
+.form-input:focus {
+    border-color: var(--primary-400);
+    box-shadow: 0 0 0 3px var(--primary-100);
+}
+
+/* Icon Button Interactions */
+.icon-btn {
+    transition: all var(--transition-base) var(--ease-out);
+}
+
+.icon-btn:hover {
+    transform: translateY(-2px);
+    color: var(--primary-600);
+}
